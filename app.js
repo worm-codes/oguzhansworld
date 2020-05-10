@@ -82,10 +82,13 @@ app.get("/blogs/new",middleWare.isLoggedIn,function(req,res){
 
 //CREATE ROUTE
 app.post("/blogs",middleWare.isLoggedIn,function(req,res){
-	
+	var author={
+		username:req.user.username,
+		id:req.user._id
+	}
 	req.body.blog.body=req.sanitize(req.body.blog.body);
 	
-	Blog.create(req.body.blog,function(err){
+	Blog.create({title:req.body.blog.title,image:req.body.blog.image,body:req.body.blog.body,author:author},function(err){
 		if(err){
 			console.log(err)
 		}
@@ -149,7 +152,7 @@ app.get("/register",function(req,res){
 })
 //handle sign up logic
 app.post("/register",function(req,res){
-	var newUser=new User({username:req.body.username});
+	var newUser=new User({username:req.body.username,isAdmin:false});
 	User.register(newUser,req.body.password,function(err,user){
 		if(err){
 			console.log(err);
@@ -216,9 +219,62 @@ app.post("/blogs/:id/comments",middleWare.isLoggedIn,function(req,res){
 			})
 		}
 	})
+})
+	
+	////////////////////////////////////////////////////////////////////////
+	//edit comment
+app.get("/blogs/:id/comments/:comment_id/edit",middleWare.checkCommentOwnership,function(req,res){////////////////
+	Comments.findById(req.params.comment_id,function(err,found){
+		if(err){
+			req.flash("error","You don`t have permission to do that");
+			res.redirect("/blogs");
+		}
+		else{
+			
+			res.render("comments/edit",{blog_id:req.params.id,comment:found});
+		}
+	})
+})
+
+
+
+
+//update comment
+app.put("/blogs/:id/comments/:comment_id",middleWare.checkCommentOwnership,function(req,res){
+	
+	req.body.text=req.sanitize(req.body.text);
+	
+	Comments.findByIdAndUpdate(req.params.comment_id,{text:req.body.text},function(err,update){
+		if(err){
+			req.flash("error","We couldn`t find the Comment");
+			res.redirect("/blogs/"+req.params.id);
+		}
+		else{
+			req.flash("success","Comment edited successfully...");
+		res.redirect("/blogs/"+req.params.id);
+	}
+	})
+})
+
+
+//delete comment
+app.delete("/blogs/:id/comments/:comment_id",middleWare.checkCommentOwnership,function(req,res){
+	Comments.findByIdAndRemove(req.params.comment_id,function(err){
+		if(err){
+			req.flash("error","We couldn`t remove the Comment");
+			res.redirect("back");
+		}
+		else{
+			req.flash("success","Comment removed successfully...");
+			res.redirect("/blogs/"+req.params.id);
+		}
+	})
+})	
+
 	
 
-})
+
+
 
 
 app.listen(3000,function(){

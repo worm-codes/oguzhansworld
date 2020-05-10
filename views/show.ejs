@@ -1,13 +1,18 @@
 <%-include("partials/header") %>
 
 <style>
-p
-{
+  #body{
     width:666px; 
     
     word-wrap:break-word; /*fazla geleni alt satira atiyo*/
 	line-height: 2em;
 }
+	.text{
+		line-height: 4em;
+	}
+	
+	
+	
 	
 	
 </style>
@@ -22,7 +27,7 @@ p
 			<span><%=blogs.created.toDateString()%></span>
 		</div>
 			<div class="description">
-				<p>
+				<p id="body">
 					<!-- tire kullanmasmizin sebebi adam </strong> tagi girerse onu html e yazmasin calistirsin yazi kalin olsun -->
 					<%-blogs.body%>
 				</p>
@@ -58,11 +63,11 @@ p
 	
 	
 	
-	/////////////////////////////////
+
 	
 	<%blogs.comments.forEach(function(comment){%>
 	<div class="ui comments">
-  <div class="comment">
+  <div class="comment mt-5">
 	  <a class="avatar">
       <img src="https://semantic-ui.com/images/avatar/small/christian.jpg">
     </a>
@@ -70,25 +75,66 @@ p
     <div class="content">
       <a class="author"><%=comment.author.username%></a>
       <div class="metadata">
-        <div class="date"><%=comment.created.toDateString()%></div>
+        <div class="date"><%=comment.created.toDateString()%>
+		  
+		  
+		  </div>
       </div>
       <div class="text">
-        <p><%-comment.text%> </p>
+		  <%-comment.text.substring(0,200)%>
+		  
+		  
+		  
+		  
+
+<span class="collapse mb-5" id="more">
+    <%-comment.text.substring(200,comment.text.length)%>
+</span> 
+		  <%if(comment.text.length>200){%>
+		  
+<span>
+	
+ <a  href="#more" data-toggle="collapse">
+	
+	 <p>
+		 
+	<i class="angle double down icon"></i>More
+	 </p><i class="fa fa-caret-down "></i> 
+	 
+	 
+</span>
+	
+	
+	
+	<%}%>
+		  
+  
+    
         
       </div>
-		<%if(currentUser){%>
-      <div class="actions">
-        <a class="reply">Reply</a>
-      </div>
-		<%}%>
+		<%if(currentUser && currentUser._id.equals(comment.author.id)){%>
+				 <span class="float-right">
+			<form method="POST" class="float-right" style="display:inline;" action="/blogs/<%=blogs._id%>/comments/<%=comment._id%>?_method=DELETE">
+			   		
+      <button style="display:inline; color:white;" class="mini ui float-right  red button">DELETE</button>
+   
+	</form>					  
+			<button style="display:inline" class="mini ui float-right green button" href="/campgrounds/<%=blogs._id%>/comments/<%=comment._id%>/edit">EDIT</button>
+					  
+			
+			</span>
+				 <%}%>	
     </div>
   </div>
 		<%})%>
+	  
+	  
+	  
  <%if(currentUser){%>
-  <form class="ui reply form" action="/blogs/<%=blogs._id%>/comments" method="POST">
+  <form class="ui reply mt-5 form" action="/blogs/<%=blogs._id%>/comments" method="POST">
     <div class="field">
 		
-      <textarea name="text"></textarea>
+      <textarea pattern=".{8,500}" required title="Eight or more characters" name="text"></textarea>
     </div>
     <button class="ui primary submit labeled icon button">
       <i class="icon edit"></i> Add Comment
@@ -97,7 +143,7 @@ p
 </div>
 	<%}%>
 	
-	////////////////////////////////
+	
 	
 </div>
 
