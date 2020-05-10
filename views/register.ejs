@@ -1,0 +1,49 @@
+<%-include("./partials/header") %>
+<Style>
+	body{
+		margin:100px;
+	}
+
+</Style>
+<div class="d-flex justify-content-center align-items-center" style="margin-top:9rem;">
+		
+		<h1 class="display-3">
+		<i class="large globe icon"></i>	Oguzhan`s World
+		</h1>
+	</div>
+
+	<div class="ui container attached message text-center" style="width:40%">
+  <div class="header">
+    Welcome 
+  </div>
+  <p>Fill out the form below to sign-up for a new account</p>
+</div>
+<form action="/register" method="POST" class="ui container text-center form attached fluid segment" style="width:40%">
+  
+  <div class="field text-center">
+    <label>USERNAME</label>
+   <input type="text" class="form-control text-center font-weight-bold" placeholder="User Name" name="username" required>
+  </div>
+  <div class="field">
+    <label>PASSWORD</label>
+    <input type="password" class="form-control text-center" placeholder="Password" name="password" required>
+  </div>
+  
+  <button class="ui blue submit button">REGISTER</button>
+</form>
+<div class="ui container bottom attached warning message" style="width:40%">
+  <i class="icon help"></i>
+  Already signed up? <a href="/login">Login here</a> instead.
+</div>
+
+
+ 
+
+
+
+
+
+
+
+
+<%- include("./partials/footer") %>

@@ -1,0 +1,23 @@
+<%-include("partials/header") %>
+     
+     <div class="ui main text container segment">
+		 <div class="ui huge header">
+			 Edit Post
+		 </div>
+		                            <!--method dan sonra put var put olarak gorucek artik  -->
+		 <form class="ui form" method="POST" action="/blogs/<%=blog._id%>?_method=PUT" id="form">
+			 <input type="text" name="blog[title]" id="form" value="<%=blog.title%>">
+			 <input type="text" name="blog[image]" id="form" value="<%=blog.image%>">
+			 <textarea name="blog[body]" id="form" required><%=blog.body%></textarea>
+			 <button class="ui inverted blue big button"  id="form" id="form">DONE</button>
+			 
+		 </form>
+</div>
+
+
+
+
+
+
+
+<%-include("partials/footer") %>

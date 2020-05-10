@@ -1,0 +1,37 @@
+<%-include("./partials/header") %>
+
+<div class="d-flex justify-content-center align-items-center" style="margin-top:9rem;">
+		
+		<h1 class="display-3">
+		<i class="large globe icon"></i>	Oguzhan`s World
+		</h1>
+	</div>
+<div class="container" style="margin-top:5rem;">
+	
+	<form action="/login" method="POST">
+	<div class="form-row"  style="width:40%; margin:0 auto;">
+    <div class="col form-group">
+      <input type="text" class="form-control text-center font-weight-bold" placeholder="Username" name="username">
+    </div>
+   
+		
+  </div>
+		<div class="form-row mt-3"  style="width:40%; margin:0 auto;">
+    <div class="col form-group">
+      <input type="password" class="form-control text-center" placeholder="Password" name="password">
+    </div>
+   
+		
+  </div>
+		
+	<div class="d-flex justify-content-center mt-3  align-items-center">
+	
+		<button class="ui  blue button" style="width:40%;">LOGIN</button>
+	</div>
+</form>
+	
+	
+</div>
+
+
+<%- include("./partials/footer") %>

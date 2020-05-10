@@ -1,0 +1,108 @@
+<%-include("partials/header") %>
+
+<style>
+p
+{
+    width:666px; 
+    
+    word-wrap:break-word; /*fazla geleni alt satira atiyo*/
+	line-height: 2em;
+}
+	
+	
+</style>
+<div class="ui main text container segment">
+	<div class="ui huge header text-center">
+		<%=blogs.title%>
+	</div>
+	<div class="ui top attached">
+		<div class="item">
+			<img class="ui mb-3 centered rounded image" src="<%=blogs.image%>">
+			<div class="content mb-3">
+			<span><%=blogs.created.toDateString()%></span>
+		</div>
+			<div class="description">
+				<p>
+					<!-- tire kullanmasmizin sebebi adam </strong> tagi girerse onu html e yazmasin calistirsin yazi kalin olsun -->
+					<%-blogs.body%>
+				</p>
+			</div>
+		</div>
+		
+	</div>
+	
+	<a class="ui inverted inverse blue big button" href="/blogs">Home</a>
+	<% if(currentUser && currentUser.equals(blogs.author.id)){%>
+	<a class="ui inverted  green big button" href="/blogs/<%=blogs._id%>/edit">Edit</a>
+	<form method="POST" action="/blogs/<%=blogs._id%>?_method=DELETE" style="display:inline">
+		<button class="ui inverted blue red  button"><i class="trash alternate icon"></i>Delete</button>
+	</form>
+	<%}%>
+	<hr class="my-5">
+	<%if(!currentUser){%>
+		<p class="text-center">
+			You have to <a href="/login">Sign In</a> or <a href="/register">Sign Up</a> to add comment...
+	</p>
+	
+	<%}%>
+	
+	
+	
+	<%if(blogs.comments.length>0){%>
+	<h1 class="text-center mt-5">
+		COMMENTS
+	</h1>
+
+	
+	<%}%>
+	
+	
+	
+	/////////////////////////////////
+	
+	<%blogs.comments.forEach(function(comment){%>
+	<div class="ui comments">
+  <div class="comment">
+	  <a class="avatar">
+      <img src="https://semantic-ui.com/images/avatar/small/christian.jpg">
+    </a>
+    
+    <div class="content">
+      <a class="author"><%=comment.author.username%></a>
+      <div class="metadata">
+        <div class="date"><%=comment.created.toDateString()%></div>
+      </div>
+      <div class="text">
+        <p><%-comment.text%> </p>
+        
+      </div>
+		<%if(currentUser){%>
+      <div class="actions">
+        <a class="reply">Reply</a>
+      </div>
+		<%}%>
+    </div>
+  </div>
+		<%})%>
+ <%if(currentUser){%>
+  <form class="ui reply form" action="/blogs/<%=blogs._id%>/comments" method="POST">
+    <div class="field">
+		
+      <textarea name="text"></textarea>
+    </div>
+    <button class="ui primary submit labeled icon button">
+      <i class="icon edit"></i> Add Comment
+    </button>
+  </form>
+</div>
+	<%}%>
+	
+	////////////////////////////////
+	
+</div>
+
+
+	
+	 
+
+<%-include("partials/footer") %>
