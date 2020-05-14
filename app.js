@@ -39,6 +39,14 @@ passport.deserializeUser(User.deserializeUser());
 
 //APP CONFIG
 mongoose.connect("mongodb://localhost/blog_app");
+mongoose.connect("mongodb+srv://oquz0553:0d950d22@cluster0-bfhg6.mongodb.net/test?retryWrites=true&w=majority",{
+	useNewUrlParser: true,
+	useCrateIndex: true
+}).then(() => {
+	console.log("connected DB");
+}).catch(err =>{
+	console.log("ERROR :",err.message);
+});
 mongoose.set('useFindAndModify', false);
 app.set("view engine","ejs");
 app.use(express.static("public"));
