@@ -1,0 +1,23 @@
+<%-include("../partials/header") %>
+     
+     <div class="ui main text container segment">
+		 <div class="ui huge header">
+			 Edit Comment
+		 </div>
+		                            <!--method dan sonra put var put olarak gorucek artik  -->
+		 <form class="ui form" method="POST" action="/blogs/<%=blog_id%>/comments/<%=comment._id%>?_method=PUT" id="form">
+			 
+			 
+			 <textarea name="text" id="form" required><%=comment.text%></textarea>
+			 <button class="ui inverted blue big button"  id="form" id="form">UPDATE</button>
+			 
+		 </form>
+</div>
+
+
+
+
+
+
+
+<%-include("../partials/footer") %>

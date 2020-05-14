@@ -34,13 +34,16 @@ p
 	</div>
 	
 		<div class="extra">
-		<a class="ui inverted blue  button" href="/blogs/<%=blog._id%>">More</a>
-				<% if(currentUser && currentUser.equals(blog.author.id)){%>
-	<a class="ui inverted blue green  button" href="/blogs/<%=blog._id%>/edit">Edit</a>
-	<form method="POST" action="/blogs/<%=blog._id%>?_method=DELETE" style="display:inline">
-		<button class="ui inverted blue  red  button"><i class="trash alternate icon"></i>Delete</button>
+				<%if(currentUser&&currentUser.isAdmin==true){%>
+			<form method="POST" action="/blogs/<%=blog._id%>?_method=DELETE" style="display:inline">
+		<button class="ui inverted   red  button"><i class="trash alternate icon"></i>Delete</button>
 	</form>
-			<%}%>
+		
+	
+	<a class="ui inverted blue green  button" href="/blogs/<%=blog._id%>/edit">Edit</a>
+				<%}%>
+	<a class="ui inverted blue  button" href="/blogs/<%=blog._id%>">More</a>
+		
 	</div>
 		
 	</div>

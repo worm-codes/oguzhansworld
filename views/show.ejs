@@ -10,6 +10,7 @@
 	.text{
 		line-height: 4em;
 	}
+	p{ text-indent:50px; }
 	
 	
 	
@@ -17,30 +18,38 @@
 	
 </style>
 <div class="ui main text container segment">
-	<div class="ui huge header text-center">
-		<%=blogs.title%>
-	</div>
+	
 	<div class="ui top attached">
 		<div class="item">
 			<img class="ui mb-3 centered rounded image" src="<%=blogs.image%>">
-			<div class="content mb-3">
-			<span><%=blogs.created.toDateString()%></span>
-		</div>
+			
+				<div class="ui huge header text-center">
+		<%=blogs.title%>
+	</div>
+			
+			
 			<div class="description">
 				<p id="body">
 					<!-- tire kullanmasmizin sebebi adam </strong> tagi girerse onu html e yazmasin calistirsin yazi kalin olsun -->
 					<%-blogs.body%>
-				</p>
-			</div>
+					<div class="content float-right">
+			<strong><%=blogs.created.toDateString()%></strong>
 		</div>
+				</p>
+				
+			</div>
+			
+		</div>
+		
 		
 	</div>
 	
-	<a class="ui inverted inverse blue big button" href="/blogs">Home</a>
-	<% if(currentUser && currentUser.equals(blogs.author.id)){%>
+	
+	<a class="ui inverted inverse blue big button mt-3" href="/blogs">Home</a>
+	<% if(currentUser&&currentUser.isAdmin==true){%>
 	<a class="ui inverted  green big button" href="/blogs/<%=blogs._id%>/edit">Edit</a>
 	<form method="POST" action="/blogs/<%=blogs._id%>?_method=DELETE" style="display:inline">
-		<button class="ui inverted blue red  button"><i class="trash alternate icon"></i>Delete</button>
+		<button class="ui inverted big red  button"><i class="trash alternate icon"></i>Delete</button>
 	</form>
 	<%}%>
 	<hr class="my-5">
@@ -68,12 +77,14 @@
 	<%blogs.comments.forEach(function(comment){%>
 	<div class="ui comments">
   <div class="comment mt-5">
-	  <a class="avatar">
-      <img src="https://semantic-ui.com/images/avatar/small/christian.jpg">
-    </a>
+	  
     
     <div class="content">
-      <a class="author"><%=comment.author.username%></a>
+		<%if(comment.author.username=="ADMIN"){%>
+		<a class="author" style="color:red;"><strong><%=comment.author.username%></strong></a>
+		<%} else {%>
+      <a class="author"><strong><%=comment.author.username%></strong></a>
+		<%}%>
       <div class="metadata">
         <div class="date"><%=comment.created.toDateString()%>
 		  
@@ -81,27 +92,20 @@
 		  </div>
       </div>
       <div class="text">
-		  <%-comment.text.substring(0,200)%>
-		  
-		  
-		  
-		  
+		  <%=comment.text.substring(0,200)%>		  
 
-<span class="collapse mb-5" id="more">
-    <%-comment.text.substring(200,comment.text.length)%>
+<span class="collapse" id="<%=comment.text%>" style="margin-bottom:9rem;">
+    <%=comment.text.substring(200,comment.text.length)%>
 </span> 
 		  <%if(comment.text.length>200){%>
 		  
-<span>
+<span style="margin-bottom:7rem;">
 	
- <a  href="#more" data-toggle="collapse">
-	
-	 <p>
-		 
+ <a  href="#<%=comment.text%>" data-toggle="collapse">
 	<i class="angle double down icon"></i>More
-	 </p><i class="fa fa-caret-down "></i> 
 	 
 	 
+	</a>
 </span>
 	
 	
@@ -112,14 +116,14 @@
     
         
       </div>
-		<%if(currentUser && currentUser._id.equals(comment.author.id)){%>
-				 <span class="float-right">
+		<%if(currentUser && currentUser._id.equals(comment.author.id) || currentUser&&currentUser.isAdmin==true){%>
+				 <span class="float-right" >
 			<form method="POST" class="float-right" style="display:inline;" action="/blogs/<%=blogs._id%>/comments/<%=comment._id%>?_method=DELETE">
 			   		
       <button style="display:inline; color:white;" class="mini ui float-right  red button">DELETE</button>
    
 	</form>					  
-			<button style="display:inline" class="mini ui float-right green button" href="/campgrounds/<%=blogs._id%>/comments/<%=comment._id%>/edit">EDIT</button>
+			<a style="display:inline" class="mini ui float-right green button" href="/blogs/<%=blogs._id%>/comments/<%=comment._id%>/edit">EDIT</a>
 					  
 			
 			</span>
@@ -131,10 +135,10 @@
 	  
 	  
  <%if(currentUser){%>
-  <form class="ui reply mt-5 form" action="/blogs/<%=blogs._id%>/comments" method="POST">
+  <form class="ui mt-5 form" action="/blogs/<%=blogs._id%>/comments" method="POST">
     <div class="field">
 		
-      <textarea pattern=".{8,500}" required title="Eight or more characters" name="text"></textarea>
+      <textarea  required name="text"></textarea>
     </div>
     <button class="ui primary submit labeled icon button">
       <i class="icon edit"></i> Add Comment

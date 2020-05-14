@@ -43,7 +43,7 @@ middleWareObj.checkCommentOwnership=function(req,res,next){
 			res.redirect("back");//en son sayfaya yonlendirir
 		}
 		else{
-			if(found.author.id.equals(req.user._id)){
+			if(found.author.id.equals(req.user._id)||req.user.isAdmin==true){
 				next();//kullandigimiz yerde bu kisim okey se diger kisma gec demek ynai yolladigimiz yerin icindeki fonksiyon calistir demek
 			}
 			else{
@@ -53,6 +53,14 @@ middleWareObj.checkCommentOwnership=function(req,res,next){
 		}
 	}
 		)}
+	else{
+		res.redirect("back");
+	}
+}
+middleWareObj.checkAdmin=function(req,res,next){
+	if(req.user && req.user.isAdmin==true){
+		next();
+	}
 	else{
 		res.redirect("back");
 	}

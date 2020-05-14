@@ -9,29 +9,47 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		
-	<link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+	<link rel="stylesheet" type="text/css" href="./stylesheets/app.css">
+		
 	</head>
 	<body>
-		<div class="ui fixed inverted menu">
+		<div class="ui fixed inverted menu" style="margin-top:0;">
 			<div class="ui container">
-				<div class="header item">
-					<a href="/"><i class=" large globe icon"></i>Oguzhan`s World</a>
+				<div class="header item" style="margin-top:0">
+					<a href="/blogs" class="ui item"><i class=" large globe icon"></i>Oguzhan`s World</a>
 					
 				</div>
+				
+				<button class="ui circular  facebook icon button" style="background:#1b1c1d">
+         <a href="http://instagram.com/oquzzzzz" target="_blank"> <i class="instagram icon"></i></a>
+         </button>
+				<button class="ui circular  twitter icon button" style="background:#1b1c1d">
+         <a href="https://twitter.com/oguzhancevik8" target="_blank"> <i class="twitter icon"></i></a>
+         </button>
+       
+          <button class="ui circular  linkedin icon button" style="background:#1b1c1d">
+         <a href="http://www.linkedin.com/in/o%C4%9Fuzhan-%C3%A7evik-552820147/" target="_blank"><i class="linkedin icon"></i></a>
+         </button>
+				<button class="ui circular  github icon button" style="background:#1b1c1d">
+         <a href="https://github.com/worm-codes" target="_blank"> <i class="github icon"></i></a>
+         </button>
+       
 				
 				
 				<div class="right menu">
 					<%if(!currentUser){%>
-					<a href="/register" class="ui item">Sign Up</a>
-					<a href="/login" class="ui item">Sign In</a>
+					<a href="/register" class="ui item"><i class="user plus icon"></i>Sign Up</a>
+					<a href="/login" class="ui item"><i class="user icon"></i>Sign In</a>
 					<% }  else{%>
+					<%if(currentUser&&currentUser.isAdmin==true){%>
 					<a href="/blogs/new" class="ui item">New Post</a>
-					
-					<a href="/logout" class="ui item">Logout</a>
+					<%}%>
+					<a href="/logout" class="ui item"><i class="sign out alternate icon"></i>Logout</a>
 					
 					
 					<%}%>
 				</div>
+				<a href="/aboutme" class="ui item" style="color:rgba(255,255,255,.9);">Who is Oğuzhan<i class="question icon"></i></a>
 			</div>
 			
 		</div>

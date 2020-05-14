@@ -6,10 +6,10 @@
 		 </div>
 		                            <!--method dan sonra put var put olarak gorucek artik  -->
 		 <form class="ui form" method="POST" action="/blogs/<%=blog._id%>?_method=PUT" id="form">
-			 <input type="text" name="blog[title]" id="form" value="<%=blog.title%>">
-			 <input type="text" name="blog[image]" id="form" value="<%=blog.image%>">
-			 <textarea name="blog[body]" id="form" required><%=blog.body%></textarea>
-			 <button class="ui inverted blue big button"  id="form" id="form">DONE</button>
+			 <input type="text" style="margin-top:2rem; font-size:2rem;" class="text-center font-weight-bold" name="blog[title]" id="form" value="<%=blog.title%>">
+			 <input type="text" style="margin-top:2rem;" name="blog[image]" id="form" value="<%=blog.image%>">
+			 <textarea name="blog[body]" style="margin-top:2rem;" id="form" required><%=blog.body%></textarea>
+			 <button class="ui inverted blue big button"  style="margin-top:2rem;" id="form" id="form">DONE</button>
 			 
 		 </form>
 </div>
