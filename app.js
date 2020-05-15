@@ -86,6 +86,7 @@ app.get("*",function(req,res){
 	res.render("errorpage");
 })
 
-app.listen(3000,function(){
-	console.log("start");
+var port = process.env.PORT || 3000;
+app.listen(port, function () {
+  console.log("Server Has Started!");
 });
