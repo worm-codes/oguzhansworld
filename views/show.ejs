@@ -2,15 +2,23 @@
 
 <style>
   #body{
-    width:666px; 
+   
     
-    word-wrap:break-word; /*fazla geleni alt satira atiyo*/
-	line-height: 2em;
+    /*fazla geleni alt satira atiyo*/
+	
+	 
 }
 	.text{
 		line-height: 4em;
+	
+		
+  
 	}
-	p{ text-indent:50px; }
+	p {
+		line-height: 2em;
+		text-indent: unset;
+  white-space: pre-wrap;
+}
 	
 	
 	
@@ -21,7 +29,7 @@
 	
 	<div class="ui top attached">
 		<div class="item">
-			<img class="ui mb-3 centered rounded image" src="<%=blogs.image%>">
+			<img class="ui mb-3 centered rounded fluid image" src="<%=blogs.image%>">
 			
 				<div class="ui huge header text-center">
 		<%=blogs.title%>
@@ -94,7 +102,7 @@
       <div class="text">
 		  <%=comment.text.substring(0,200)%>		  
 
-<span class="collapse" id="<%=comment.text%>" style="margin-bottom:9rem;">
+<span class="collapse" id="<%=comment.text%>" style="margin-bottom:9rem;  white-space: pre-wrap;">
     <%=comment.text.substring(200,comment.text.length)%>
 </span> 
 		  <%if(comment.text.length>200){%>
