@@ -44,8 +44,8 @@
 		
 	</div>
 	
+	<a href="javascript:history.back()" class=" ui red button big inverted ">Go Back</a>
 	
-	<a class="ui inverted inverse blue big button mt-3" href="/blogs">Home</a>
 	<% if(currentUser&&currentUser.isAdmin==true){%>
 	<a class="ui inverted  green big button" href="/blogs/<%=blogs._id%>/edit">Edit</a>
 	<form method="POST" action="/blogs/<%=blogs._id%>?_method=DELETE" style="display:inline">

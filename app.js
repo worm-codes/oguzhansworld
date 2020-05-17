@@ -38,8 +38,12 @@ passport.deserializeUser(User.deserializeUser());
 
 
 //APP CONFIG
-//mongoose.connect("mongodb://localhost/blog_app");
-mongoose.connect("mongodb+srv://oquz0553:0d950d22@cluster0-bfhg6.mongodb.net/test?retryWrites=true&w=majority",{
+//export yazip variable esitlersek enviromental variable olustururuz aynisini "heroku config:set" yazip olustururuz yani bi herokuda birde burda degisken olusturmus oluruz ama farkli degerlerde ayni isimde
+var url = process.env.DATABASEURL || "mongodb://localhost/blog_app";
+//or kismindan sonrasi back up database patlarsa falan burdaki database i yolluyoruz degisken olusturmamizin nedeni ise database user passsword kismi gorunmesin diye
+
+
+mongoose.connect(url,{
 	useNewUrlParser: true,
 	useCreateIndex: true
 }).then(() => {
@@ -85,7 +89,7 @@ app.get("/aboutme",function(req,res){
 app.get("*",function(req,res){
 	res.render("errorpage");
 })
-
+//important
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
   console.log("Server Has Started!");

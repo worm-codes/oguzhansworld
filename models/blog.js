@@ -16,6 +16,7 @@ var blogSchema=new mongoose.Schema({
 		       ref:"Comment"		  
 		  }		  
 	  ],
+	category:String,
 	title:String,
 	image:String,
 	body:String,

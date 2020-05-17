@@ -11,7 +11,25 @@
 		 <form class="ui form" method="POST" action="/blogs"  >
 			 <input type="text" style="margin-top:2rem; font-size:2rem;" class="text-center font-weight-bold"  name="blog[title]" id="form" required placeholder="TITLE">
 			 <input type="text" style="margin-top:2rem;" name="blog[image]"  required placeholder="Paste Your Image URL here.">
+			 
+			 
 			 <textarea name="blog[body]"  style="margin-top:2rem;"  required placeholder="Spit out Your Thoughts"></textarea>
+			
+			 
+			 
+			 <label for="blog[category]" class="mt-3">Category</label>
+			 <select name="blog[category]" class="form-control form-control-lg">
+  
+				 <option>Technology</option>
+				 <option>Game</option>
+				 <option>Science</option>
+				 <option>History</option>
+				<option>Travel</option>
+
+</select>
+			 
+			 
+			 
 			 <button class="ui inverted blue big button"  style="margin-top:2rem;" id="form" id="form">POST</button>
 			 
 		 </form>

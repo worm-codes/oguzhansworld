@@ -23,6 +23,7 @@ router.get("/",function(req,res){
 	
 	
 })
+
 //NEW ROUTE
 router.get("/new",middleWare.checkAdmin,function(req,res){
 	res.render("new");
@@ -36,7 +37,7 @@ router.post("/",middleWare.checkAdmin,function(req,res){
 	}
 	req.body.blog.body=req.sanitize(req.body.blog.body);
 	
-	Blog.create({title:req.body.blog.title,image:req.body.blog.image,body:req.body.blog.body,author:author},function(err){
+	Blog.create({title:req.body.blog.title,category:req.body.blog.category,image:req.body.blog.image,body:req.body.blog.body,author:author},function(err){
 		if(err){
 			console.log(err)
 		}
@@ -89,7 +90,7 @@ router.delete("/:id",middleWare.checkAdmin,function(req,res){
 			res.render("errorpage");
 		}
 		else{
-			res.redirect("/blogs");
+			res.redirect('back');
 		}
 	})
 })	

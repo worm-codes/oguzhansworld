@@ -7,17 +7,60 @@ p
     word-wrap:break-word; /*fazla geleni alt satira atiyo*/
 	line-height: 1.42857143;
 }
+	.nav{
+		font-size:2rem;
+	}
 	
 	
 </style>
+<script>
+	//secitign kategorinin aktif kalmasini sagliyor
+$(document).ready(function() {
+    if (location.hash) {
+        $("a[href='" + location.hash + "']").tab("show");
+    }
+    $(document.body).on("click", "a[data-toggle='list']", function(event) {
+        location.hash = this.getAttribute("href");
+    });
+});
+$(window).on("popstate", function() {
+    var anchor = location.hash || $("a[data-toggle='list']").first().attr("href");
+    $("a[href='" + anchor + "']").tab("show");
+});
+</script>
 
-<div class="ui main text container" style="margin-top:5em;">
-	<div class="ui huge header" style="text-align:center">
-		TIMELINE
-	</div>
+<div class="row" style="margin-left:11rem;">
+  <div class="col-2" style="margin-top:3rem;">
+    <div class="list-group fixed" id="list-tab" role="tablist">
+		
+		
+      <a class="list-group-item list-group-item-action active " id="list-technology-list" data-toggle="list" href="#list-technology" role="tab" aria-controls="technology">Technology</a>
+		
+	
+		
+      <a class="list-group-item list-group-item-action " id="list-game-list" data-toggle="list" href="#list-game" role="tab" aria-controls="game">Game</a>
+		
+		
+      <a class="list-group-item list-group-item-action " id="list-science-list" data-toggle="list" href="#list-science" role="tab" aria-controls="science">Science</a>
+		
+		
+      <a class="list-group-item list-group-item-action " id="list-history-list" data-toggle="list" href="#list-history" role="tab" aria-controls="history">History</a>
+		
+		<a class="list-group-item list-group-item-action " id="list-travel-list" data-toggle="list" href="#list-travel" role="tab" aria-controls="travel">Travel</a>
+		
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="tab-content " id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-technology" role="tabpanel" aria-labelledby="list-technology-list">
+		
+		  <div class="ui main container  text" style="margin-left:0;">
+	
+	
 	<div class="ui top attached segment">
 		<div class="ui diveded items">
 			<% blogs.forEach(function(blog){%>
+			<%if(blog.category=="Technology"){%>
 <div class="item">
 	<div class=image>
 		<img src="<%=blog.image%>">
@@ -55,11 +98,260 @@ p
 	
 	
 	</div> 
+			<%}%>
 <%})%>
 		</div>
 	</div>
 	
 </div>
+		
+		  
+		  
+		  
+		</div>
+      <div class="tab-pane fade" id="list-game" role="tabpanel" aria-labelledby="list-game-list">
+		
+		  <div class="ui main container  text" style="margin-left:0;">
+	
+	
+	<div class="ui top attached segment">
+		<div class="ui diveded items">
+			<% blogs.forEach(function(blog){%>
+			<%if(blog.category=="Game"){%>
+<div class="item">
+	<div class=image>
+		<img src="<%=blog.image%>">
+	</div>
+	<div class="content">
+		<a class="header" href="/blogs/<%=blog._id%>"><%=blog.title%></a> 
+		<div class="meta">
+		 <span><%=blog.created.toDateString()%></span>
+	</div>
+	<div class="description">
+		<p>
+	 <%-blog.body.substring(0, 300) %>...
+</p>
+	</div>
+	
+		<div class="extra">
+				<%if(currentUser&&currentUser.isAdmin==true){%>
+			<form method="POST" action="/blogs/<%=blog._id%>?_method=DELETE" style="display:inline">
+		<button class="ui inverted   red  button"><i class="trash alternate icon"></i>Delete</button>
+	</form>
+		
+	
+	<a class="ui inverted blue green  button" href="/blogs/<%=blog._id%>/edit">Edit</a>
+				<%}%>
+	<a class="ui inverted blue  button" href="/blogs/<%=blog._id%>">More</a>
+		
+	</div>
+		
+	</div>
+	
+	
+     
+    
+     
+	
+	
+	</div> 
+			<%}%>
+<%})%>
+		</div>
+	</div>
+	
+</div>
+		
+		  
+		  
+		
+		
+		</div>
+      <div class="tab-pane fade" id="list-science" role="tabpanel" aria-labelledby="list-science-list">
+		
+		  <div class="ui main container  text" style="margin-left:0;">
+	
+	
+	<div class="ui top attached segment">
+		<div class="ui diveded items">
+			<% blogs.forEach(function(blog){%>
+			<%if(blog.category=="Science"){%>
+<div class="item">
+	<div class=image>
+		<img src="<%=blog.image%>">
+	</div>
+	<div class="content">
+		<a class="header" href="/blogs/<%=blog._id%>"><%=blog.title%></a> 
+		<div class="meta">
+		 <span><%=blog.created.toDateString()%></span>
+	</div>
+	<div class="description">
+		<p>
+	 <%-blog.body.substring(0, 300) %>...
+</p>
+	</div>
+	
+		<div class="extra">
+				<%if(currentUser&&currentUser.isAdmin==true){%>
+			<form method="POST" action="/blogs/<%=blog._id%>?_method=DELETE" style="display:inline">
+		<button class="ui inverted   red  button"><i class="trash alternate icon"></i>Delete</button>
+	</form>
+		
+	
+	<a class="ui inverted blue green  button" href="/blogs/<%=blog._id%>/edit">Edit</a>
+				<%}%>
+	<a class="ui inverted blue  button" href="/blogs/<%=blog._id%>">More</a>
+		
+	</div>
+		
+	</div>
+	
+	
+     
+    
+     
+	
+	
+	</div> 
+			<%}%>
+<%})%>
+		</div>
+	</div>
+	
+</div>
+		
+		  
+		  
+		
+		
+		</div>
+      <div class="tab-pane fade" id="list-history" role="tabpanel" aria-labelledby="list-history-list">
+		
+		  <div class="ui main container  text" style="margin-left:0;">
+	
+	
+	<div class="ui top attached segment">
+		<div class="ui diveded items">
+			<% blogs.forEach(function(blog){%>
+			<%if(blog.category=="History"){%>
+<div class="item">
+	<div class=image>
+		<img src="<%=blog.image%>">
+	</div>
+	<div class="content">
+		<a class="header" href="/blogs/<%=blog._id%>"><%=blog.title%></a> 
+		<div class="meta">
+		 <span><%=blog.created.toDateString()%></span>
+	</div>
+	<div class="description">
+		<p>
+	 <%-blog.body.substring(0, 300) %>...
+</p>
+	</div>
+	
+		<div class="extra">
+				<%if(currentUser&&currentUser.isAdmin==true){%>
+			<form method="POST" action="/blogs/<%=blog._id%>?_method=DELETE" style="display:inline">
+		<button class="ui inverted   red  button"><i class="trash alternate icon"></i>Delete</button>
+	</form>
+		
+	
+	<a class="ui inverted blue green  button" href="/blogs/<%=blog._id%>/edit">Edit</a>
+				<%}%>
+	<a class="ui inverted blue  button" href="/blogs/<%=blog._id%>">More</a>
+		
+	</div>
+		
+	</div>
+	
+	
+     
+    
+     
+	
+	
+	</div> 
+			<%}%>
+<%})%>
+		</div>
+	</div>
+	
+</div>
+		
+		  
+		  
+		
+		
+		</div>
+		<div class="tab-pane fade" id="list-travel" role="tabpanel" aria-labelledby="list-travel-list">
+		
+		  <div class="ui main container  text" style="margin-left:0;">
+	
+	
+	<div class="ui top attached segment">
+		<div class="ui diveded items">
+			<% blogs.forEach(function(blog){%>
+			<%if(blog.category=="Travel"){%>
+<div class="item">
+	<div class=image>
+		<img src="<%=blog.image%>">
+	</div>
+	<div class="content">
+		<a class="header" href="/blogs/<%=blog._id%>"><%=blog.title%></a> 
+		<div class="meta">
+		 <span><%=blog.created.toDateString()%></span>
+	</div>
+	<div class="description">
+		<p>
+	 <%-blog.body.substring(0, 300) %>...
+</p>
+	</div>
+	
+		<div class="extra">
+				<%if(currentUser&&currentUser.isAdmin==true){%>
+			<form method="POST" action="/blogs/<%=blog._id%>?_method=DELETE" style="display:inline">
+		<button class="ui inverted   red  button"><i class="trash alternate icon"></i>Delete</button>
+	</form>
+		
+	
+	<a class="ui inverted blue green  button" href="/blogs/<%=blog._id%>/edit">Edit</a>
+				<%}%>
+	<a class="ui inverted blue  button" href="/blogs/<%=blog._id%>">More</a>
+		
+	</div>
+		
+	</div>
+	
+	
+     
+    
+     
+	
+	
+	</div> 
+			<%}%>
+<%})%>
+		</div>
+	</div>
+	
+</div>
+		
+		  
+		  
+		
+		
+		</div>
+		
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
 
 
 
