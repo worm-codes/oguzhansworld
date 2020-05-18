@@ -9,7 +9,7 @@
 	 
 }
 	.text{
-		line-height: 4em;
+		line-height: 4rem;
 	
 		
   
@@ -108,16 +108,16 @@
 		  </div>
       </div>
       <div class="text">
-		  <%=comment.text.substring(0,200)%>		  
+		<span> <%=comment.text.substring(0,200)%>	AAAA</span>  		  
 
-<span class="collapse" id="<%=comment.text%>" style="margin-bottom:9rem; ">
+<span class="collapse" id="<%=comment.text%>" style="margin-bottom:9rem;">
     <%=comment.text.substring(200,comment.text.length)%>
 </span> 
 		  <%if(comment.text.length>200){%>
 		  
 <span style="margin-bottom:7rem;">
 	
- <a  href="#<%=comment.text%>" data-toggle="collapse">
+ <a  href="#<%=comment.text%>" data-toggle="collapse" class="text">
 	<i class="angle double down icon"></i>More
 	 
 	 
