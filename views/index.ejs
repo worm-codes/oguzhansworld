@@ -2,7 +2,7 @@
 <style>
 p
 {
-    width:350px; 
+    width:290px; 
     
     word-wrap:break-word; /*fazla geleni alt satira atiyo*/
 	line-height: 1.42857143;
@@ -27,6 +27,11 @@ $(window).on("popstate", function() {
     var anchor = location.hash || $("a[data-toggle='list']").first().attr("href");
     $("a[href='" + anchor + "']").tab("show");
 });
+	
+
+	
+	
+	
 </script>
 
 <div class="row" style="margin-left:11rem;">
@@ -62,7 +67,7 @@ $(window).on("popstate", function() {
 			<% blogs.forEach(function(blog){%>
 			<%if(blog.category=="Technology"){%>
 <div class="item">
-	<div class=image>
+	<div class="ui medium image">
 		<img src="<%=blog.image%>">
 	</div>
 	<div class="content">
@@ -72,7 +77,7 @@ $(window).on("popstate", function() {
 	</div>
 	<div class="description">
 		<p>
-	 <%-blog.body.substring(0, 300) %>...
+	 <%-blog.body.substring(0, 350) %>...
 </p>
 	</div>
 	
@@ -178,7 +183,7 @@ $(window).on("popstate", function() {
 			<%if(blog.category=="Science"){%>
 <div class="item">
 	<div class=image>
-		<img src="<%=blog.image%>">
+		<img id="imageid"src="<%=blog.image%>">
 	</div>
 	<div class="content">
 		<a class="header" href="/blogs/<%=blog._id%>"><%=blog.title%></a> 

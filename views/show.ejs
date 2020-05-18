@@ -15,9 +15,17 @@
   
 	}
 	p {
+		
+		 width:670px; 
+    
+    word-wrap:break-word; /*fazla geleni alt satira atiyo*/
+	
+		
+		
+		
 		line-height: 2em;
-		text-indent: unset;
-  white-space: pre-wrap;
+		
+ white-space: pre-line;
 }
 	
 	
@@ -29,7 +37,7 @@
 	
 	<div class="ui top attached">
 		<div class="item">
-			<img class="ui mb-3 centered rounded fluid image" src="<%=blogs.image%>">
+			<img class="ui mb-3 centered rounded  image" src="<%=blogs.image%>">
 			
 				<div class="ui huge header text-center">
 		<%=blogs.title%>

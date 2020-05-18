@@ -85,12 +85,13 @@ router.put("/:id",middleWare.checkAdmin,function(req,res){
 })
 //DELETE ROUTE
 router.delete("/:id",middleWare.checkAdmin,function(req,res){
-	Blog.findByIdAndRemove(req.params.id,function(err){
+	Blog.findByIdAndRemove(req.params.id,function(err,found){
 		if(err){
 			res.render("errorpage");
 		}
 		else{
-			res.redirect('back');
+			res.redirect('/blogs'+'#list-'+found.category.toLowerCase());
+			
 		}
 	})
 })	
