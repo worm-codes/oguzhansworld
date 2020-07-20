@@ -60,7 +60,7 @@ app.use(methodOverride("_method"));//form lar get ve post dan baska bisey kabul 
 
 app.use(flash());
 app.use(function(req,res,next){
-	res.locals.currentUser=req.user;//cuurentUser kullnacagimiz variable req.use o anki giren kullanici nesnesi bunun yerine status=1 =0 gibi durumlada yapabilirdik
+	res.locals.currentUser=req.user;//currentUser kullnacagimiz variable req.use o anki giren kullanici nesnesi bunun yerine status=1 =0 gibi durumlada yapabilirdik
 	res.locals.error=req.flash("error");
 	res.locals.success=req.flash("success");
 	
