@@ -1,5 +1,6 @@
-
-## My first personel website and my practical product. oguzhansworld.herokuapp.com ==> you can visit that website.
+#You can see how project works in this video.
+#https://youtu.be/y6f8E66cOII?t=111
+## OguzhansWorld
 
 ## Technologies
 Project is created with:
