@@ -13,6 +13,6 @@ Project is created with:
 * MongoDB
 * npm 
 
+## Installation
+write "npm install" to console and it will download all needed packages according to package.json
 
-Source Code   
----Oguzhan Cevik
